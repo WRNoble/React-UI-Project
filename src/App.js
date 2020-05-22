@@ -1,48 +1,64 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      nasa: [],
+      data: [],
+      person: false,
     }
   }
 
   componentDidMount() {
-    let url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=8xU4o02n5gJAwNEErowpY1mfE31mtk1ybYDbf3km"
+    let url = 'https://jsonplaceholder.typicode.com/users';
   
     fetch(url)
-    console.log(url)
       .then(res => res.json())
       .then(data => {
         this.setState({
-          nasa: data,
+          person: true,
+          data: data,
         })
       })
   }
 
   render() {
-    return (
-      <div className="tab1">
-        <p></p>
-      </div>
-      
-      <div className="tab2">
-        <p></p>
-      </div>
-      <div className="tab3">
-        <p></p>
-      </div>
-      <div className="tab4">
-        <p></p>
-      </div>
-      <div className="tab5">
-        <p></p>
-      </div>
-    )
+    
+    let { person, data } = this.state
+      console.log(data)
+    
+        return (
+          <div className="App">
+            <ul>
+              {data.map(post => (
+                <li key={data.id}>{data.title}</li>
+              ))}
+            </ul>
+          </div>
+        )
+    
+
+    // return (
+    //   <div className="container">
+    //     <div className="tab1">Hello
+    //       <p className="content">hello</p>
+    //     </div>
+    //     <div className="tab2">Hello
+    //       <p className="content">hello</p>
+    //     </div>
+    //     <div className="tab3">Hello
+    //       <p className="content">hello</p>
+    //     </div>
+    //     <div className="tab4">Hello
+    //       <p className="content">hello</p>
+    //     </div>
+    //     <div className="tab5">Hello
+    //       <p className="content">hello</p>
+    //     </div>
+    //   </div>
+    //   )
   }
 }
 
